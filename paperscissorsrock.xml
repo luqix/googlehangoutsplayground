@@ -24,10 +24,10 @@
   <script type="text/javascript">google.load("jquery", "1.3.2");</script>
   <script type="text/javascript"
       src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
-  <script type="text/javascript" src="https://github.com/alexandergraves/googlehangoutsplayground/paperscissorsrock.js"></script>
+  <script type="text/javascript" src="https://github.com/alexandergraves/googlehangoutsplayground/blob/master/paperscissorsrock.js"></script>
 
   <link type="text/css" rel="stylesheet"
-      href="https://github.com/alexandergraves/googlehangoutsplayground/static/paperscissorsrock/paperscissorsrock.css" />
+      href="https://github.com/alexandergraves/googlehangoutsplayground/blob/master/static/paperscissorsrock/paperscissorsrock.css" />
 
 ]]></Content>
 </Module>
