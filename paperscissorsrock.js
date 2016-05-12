@@ -307,6 +307,7 @@ function render() {
 
   container_
       .empty()
+      .append("<div>")
       .append(createAnswersTable(data));
 }
 
