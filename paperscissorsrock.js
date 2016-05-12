@@ -311,6 +311,42 @@ function render() {
 }
 
 /**
+ * Syncs local copies of shared state with those on the server and renders the
+ *     app to reflect the changes.
+ * @param {!Object.<!string, !string>} state The shared state.
+ * @param {!Object.<!string, Object.<!string, *>>} metadata Data describing the
+ *     shared state.
+ */
+function updateLocalDataState(state, metadata) {
+  state_ = state;
+  metadata_ = metadata;
+  render();
+}
+
+/**
+ * Syncs local copy of the participants list with that on the server and renders
+ *     the app to reflect the changes.
+ * @param {!Array.<gapi.hangout.Participant>} participants The new list of
+ *     participants.
+ */
+function updateLocalParticipantsData(participants) {
+  participants_ = participants;
+  render();
+}
+
+/**
+ * Create required DOM elements and listeners.
+ */
+function prepareAppDOM() {
+  container_ = $('<div />');
+
+  var body = $('body');
+  body.mousedown(function(e) {
+    e.stopPropagation();
+  });
+};
+
+/**
  * Creates the DOM element that shows the button for each response and displays
  * each participant under his answer.
  * @param {!Object.<!string, *>} data The information used to populate the
@@ -414,39 +450,8 @@ function createParticipantElement(participant, response) {
 
   var name = $('<h2 />').text(participant.person.displayName);
 
-  return $('<li />').append(avatar, name, statusAnchor);
+  return $('<li />').append(avatar, name);
 }
-
-/**
- * Syncs local copies of shared state with those on the server and renders the
- *     app to reflect the changes.
- * @param {!Object.<!string, !string>} state The shared state.
- * @param {!Object.<!string, Object.<!string, *>>} metadata Data describing the
- *     shared state.
- */
-function updateLocalDataState(state, metadata) {
-  state_ = state;
-  metadata_ = metadata;
-  render();
-}
-
-/**
- * Syncs local copy of the participants list with that on the server and renders
- *     the app to reflect the changes.
- * @param {!Array.<gapi.hangout.Participant>} participants The new list of
- *     participants.
- */
-function updateLocalParticipantsData(participants) {
-  participants_ = participants;
-  render();
-}
-
-/**
- * Create required DOM elements and listeners.
- */
-function prepareAppDOM() {
-  container_ = $('<div />');
-};
 
 (function() {
   if (gapi && gapi.hangout) {
