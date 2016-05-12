@@ -219,10 +219,88 @@ function onAnswer(newAnswer) {
   }
 }
 
+function isPlaying(participant)
+{
+  var isplayingKey = makeUserKey(p.id, 'ispalying');
+  var isplaying = getState(isplayingKey);
+  return isplaying !== false;
+}
+
+function getAnswer(participant)
+{
+  var answerKey = makeUserKey(p.id, 'answer');
+  var answer = getState(answerKey);
+  return answer;
+}
+
 function onRandomAnswer()
 {
   var idx = Math.floor(Math.random() * (2-0+1) + 0);
   onAnswer(Answers[Object.keys(Answers)[idx]]);
+}
+
+function getWinningAnswer(hasPaper, hasScissors, hasRock)
+{
+  if (hasPaper && hasScissors && hasRock) return null;
+
+  if (hasPaper && hasScissors) return Answers.SCISSORS;
+  if (hasPaper && hasRock) return Answers.PAPER;
+  if (hasScissors && hasRock) return Answers.ROCK;
+
+  return null;
+}
+
+function isRoundEnded()
+{
+  var playing = 0;
+  var answered = 0;
+
+  for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
+    var p = participants_[i];
+    if (isPlaying(p)) playing++;
+    if (hasAnswered(p)) answered++;
+  }
+
+  return playing === answered;
+}
+
+function winningAnswerForThisRound()
+{
+  if (!isRoundEnded()) return;
+
+  data[Answers.PAPER] = [];
+  data[Answers.SCISSORS] = [];
+  data[Answers.ROCK] = [];
+  
+  for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
+    if (isPlaying(p)) {
+      var answer = getAnswer(p);
+      if (answer && data[answer])
+        data[answer].push(p);
+    }
+  }
+
+  return getWinningAnswer(data[Answers.PAPER].length>0,
+          data[Answers.SCISSORS].length>0,
+          data[Answers.ROCK].length>0);
+}
+
+function markWinningParticipants(data)
+{
+  if (!isRoundEnded()) return;
+
+  var winningAnswer = winningAnswerForThisRound();
+  if (!winningAnswer) return;
+
+  for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
+    var p = participants_[i];
+    var isplayingKey = makeUserKey(p.id, 'ispalying');
+
+    var ans = getAnswer(p);
+
+    if (isPlaying(p) && ans != winningAnswer)
+      saveValue(isplayingKey, false)
+  }
 }
 
 /**
