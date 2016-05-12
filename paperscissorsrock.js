@@ -24,8 +24,7 @@
 var Answers = {
   PAPER: 'p',
   SCISSORS: 's',
-  ROCK: 'r',
-  RANDOM: 'd'
+  ROCK: 'r'
 };
 var HOST = 'https://github.com/alexandergraves/googlehangoutsplayground/tree/master/static/paperscisorsrock';
 
@@ -33,13 +32,11 @@ var DEFAULT_ICONS = {};
 DEFAULT_ICONS[Answers.PAPER] = HOST + '/paper.png';
 DEFAULT_ICONS[Answers.SCISSORS] = HOST + '/scissors.png';
 DEFAULT_ICONS[Answers.ROCK] = HOST + '/rock.png';
-DEFAULT_ICONS[Answers.RANDOM] = HOST + '/random.png';
 
 var DEFAULT_STATUS = {};
 DEFAULT_STATUS[Answers.PAPER] = 'Paper';
 DEFAULT_STATUS[Answers.SCISSORS] = 'Scissors';
 DEFAULT_STATUS[Answers.ROCK] = 'Rock';
-DEFAULT_STATUS[Answers.RANDOM] = 'Feeling Lucky';
 
 /**
  * Shared state of the app.
@@ -222,6 +219,12 @@ function onAnswer(newAnswer) {
   }
 }
 
+function onRandomAnswer()
+{
+  var idx = Math.floor(Math.random() * (2-0+1) + 0);
+  onAnswer(Answers[keys(Answers)[idx]]);
+}
+
 /**
  * Gets the value of opt_stateKey in the shared state, or the entire state
  * object if opt_stateKey is null or not supplied.
@@ -266,7 +269,6 @@ function render() {
   data[Answers.PAPER] = [];
   data[Answers.SCISSORS] = [];
   data[Answers.ROCK] = [];
-  data[Answers.RANDOM] = [];
 
   var myId = getUserHangoutId();
   for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
@@ -412,13 +414,21 @@ function createAnswersTable(data) {
   if (!data.responded) {
     var instructImg = $('<img />')
         .attr({
-          // TODO: change this?
           'src': '//hangoutsapi.appspot.com/static/yesnomaybe/directions.png',
           'title': 'Make a selection'
         });
-    var instructText = $('<div />')
-        .text('Click an option to cast your vote');
-    var footDiv = $('<div />').append(instructImg, instructText);
+    var randomLink =  $('<a />')
+          .attr('href', '#')
+          .text("Feeling Lucky")
+          .click(function() {
+            return false;
+          });
+    var randomBtn = $('<div />')
+          .addClass('button')
+          .addClass('random')
+          .append(randomLink)
+          .mouseup(onRandomAnswer);
+    var footDiv = $('<div />').append(instructImg, randomBtn);
     var footCell = $('<td colspan="3" />')
         .append(footDiv);
     var footRow = $('<tr />')
