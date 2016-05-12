@@ -436,6 +436,10 @@ function render() {
       .empty()
       .append(createTimer())
       .append(createAnswersTable(data, winner));
+
+  if(roundEnded_)  {
+    resetTimer();
+  }
 }
 
 /**
@@ -504,10 +508,14 @@ function createAnswersTable(data, winner) {
       var ansLink = $('<a />')
           .attr('href', '#')
           .text(DEFAULT_STATUS[ans])
-          .append(numAnswered)
           .click(function() {
             return false;
           });
+      if(roundEnded_) {
+          ansLink
+          .append(numAnswered)
+          .disable();
+      }
       var ansBtn = $('<div />')
           .addClass('button')
           .append(ansLink)
@@ -609,14 +617,21 @@ function updateTimer(minutes, seconds) {
 
 function timerExpired() {
   if(this.expired()) {
-    endRound();
+    endRound()
+    resetTimer();
   }
 }
 
 function endRound() {
-  timer_ = null;
-
   roundEnded_ = true;
+}
+
+function resetTimer() {
+  if(timer_) {
+    timer_.duration = 0;
+  }
+
+  timer_ = null;
 }
 
 function currentUserIsCurrentParticipant(participant) {
