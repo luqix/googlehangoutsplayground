@@ -242,7 +242,7 @@ function isPlaying(participant)
 
 function getAnswer(participant)
 {
-  var answerKey = makeUserKey(p.id, 'answer');
+  var answerKey = makeUserKey(participant.id, 'answer');
   var answer = getState(answerKey);
   return answer;
 }
