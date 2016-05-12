@@ -74,6 +74,13 @@ var container_ = null;
 var timer_ = null;
 
 /**
+  * Whether or not the round has ended
+  * @type bool
+  * @private
+  */
+  var roundEnded_ = false;
+
+/**
  * Executes the provided function after a minor delay.
  * @param {function()} func The function to execute.
  */
@@ -455,9 +462,8 @@ function createTimer()
       
   if(!timer_) {
     timer_ = new CountDownTimer(2*60);
+    timer_.onTick(updateTimer).onTick(timerExpired).start();
   }
-
-  timer_.onTick(updateTimer).onTick(timerExpired).start();
 
   return display;
 }
@@ -479,7 +485,13 @@ function timerExpired() {
 }
 
 function endRound() {
-  
+  timer_ = null;
+
+  roundEnded_ = true;
+}
+
+function restartTimer() {
+  setTimeout(function() { timer.start(); }, 1000)
 }
 
 /**
