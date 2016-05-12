@@ -25,6 +25,7 @@
   <script type="text/javascript"
       src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
   <script type="text/javascript" src="https://alexandergraves.github.io/googlehangoutsplayground/content/paperscissorsrock.js"></script>
+  <script type="text/javascript" src="https://alexandergraves.github.io/googlehangoutsplayground/content/timer.js"></script>
 
   <link type="text/css" rel="stylesheet"
       href="https://alexandergraves.github.io/googlehangoutsplayground/content/static/paperscisorsrock/paperscisorsrock.css" />

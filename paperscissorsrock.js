@@ -310,19 +310,6 @@ function render() {
 }
 
 /**
- * Syncs local copies of shared state with those on the server and renders the
- *     app to reflect the changes.
- * @param {!Object.<!string, !string>} state The shared state.
- * @param {!Object.<!string, Object.<!string, *>>} metadata Data describing the
- *     shared state.
- */
-function updateLocalDataState(state, metadata) {
-  state_ = state;
-  metadata_ = metadata;
-  render();
-}
-
-/**
  * Syncs local copy of the participants list with that on the server and renders
  *     the app to reflect the changes.
  * @param {!Array.<gapi.hangout.Participant>} participants The new list of
@@ -441,6 +428,19 @@ function createParticipantElement(participant, response) {
   }
 
   return $('<li />').append(avatar, name, statusAnchor);
+}
+
+/**
+ * Syncs local copies of shared state with those on the server and renders the
+ *     app to reflect the changes.
+ * @param {!Object.<!string, !string>} state The shared state.
+ * @param {!Object.<!string, Object.<!string, *>>} metadata Data describing the
+ *     shared state.
+ */
+function updateLocalDataState(state, metadata) {
+  state_ = state;
+  metadata_ = metadata;
+  render();
 }
 
 (function() {
