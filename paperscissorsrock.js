@@ -287,6 +287,7 @@ function winningAnswerForThisRound()
   data[Answers.ROCK] = [];
   
   for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
+    var p = participants_[i];
     if (isPlaying(p)) {
       var answer = getAnswer(p);
       if (answer && data[answer])
@@ -299,7 +300,26 @@ function winningAnswerForThisRound()
           data[Answers.ROCK].length>0);
 }
 
-function markWinningParticipants(data)
+function winAndLoseParticipants(winningAnswer)
+{
+  if(!isRoundEnded()) return;
+  
+  var winningAnswer = winningAnswerForThisRound();
+  var ret = {winners:[], losers:[]};
+  for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
+    var p = participants_[i];
+    if (isPlaying(p)) {
+      if (getAnswer(p) != winningAnswer)
+        ret.losers.push[p];
+      else
+        ret.winners.push[p];
+    }
+  }
+
+  return ret;
+}
+
+function markWinningParticipants()
 {
   if (!isRoundEnded()) return;
 
@@ -374,6 +394,7 @@ function render() {
       data[answer].push(p);
       if (p.id === myId) {
         data.responded = true;
+        data.isplaying = isPlaying(p);
       }
       ++data.total;
 
@@ -399,6 +420,14 @@ function render() {
     }
   }
 
+  var winAndLose = winAndLoseParticipants();
+  var winner = null;
+  if (winAndLose.winners.length === 1) {
+    winner = winAndLose.winners[0];
+  }
+
+  markWinningParticipants();
+
   if(data.total == participants_.length) {
     endRound();
   }
@@ -406,7 +435,7 @@ function render() {
   container_
       .empty()
       .append(createTimer())
-      .append(createAnswersTable(data));
+      .append(createAnswersTable(data, winner));
 }
 
 /**
@@ -452,7 +481,7 @@ function prepareAppDOM() {
  *     table.
  * @return {Element} The DOM element displaying the app's main interface.
  */
-function createAnswersTable(data) {
+function createAnswersTable(data, winner) {
   var buttonRow = $('<tr />');
 
   var onButtonMouseDown = function() {
@@ -488,7 +517,8 @@ function createAnswersTable(data) {
       var respondList = $('<ul />');
       for (var i = 0, iLen = data[ans].length; i < iLen; ++i) {
         var currentParticipant = data[ans][i];
-        if(roundEnded_ || currentUserIsCurrentParticipant(currentParticipant)) {
+        if((roundEnded_ || currentUserIsCurrentParticipant(currentParticipant))
+           && isPlaying(currentParticipant)) {
           respondList.append(createParticipantElement(currentParticipant, ans));
         }
       }
@@ -510,7 +540,21 @@ function createAnswersTable(data) {
         'width': '100%'
       }).append(buttonRow);
 
-  if (!data.responded) {
+  if (winner) {
+    var winnermsg = $('<h2 />')
+      .text("We have a WINNER:");
+    var winnerele = createParticipantElement(winner, '');
+    var footDiv = $('<div />').append(winnermsg, winnerele);
+    var footCell = $('<td colspan="3" />')
+        .append(footDiv);
+    var footRow = $('<tr />')
+        .attr('id', 'footer')
+        .addClass('footer')
+        .append(footCell);
+    
+    table.append(footRow);
+  }
+  else if (!data.responded && data.ispalying) {
     var instructImg = $('<img />')
         .attr({
           'src': '//hangoutsapi.appspot.com/static/yesnomaybe/directions.png',
