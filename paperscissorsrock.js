@@ -307,7 +307,7 @@ function render() {
 
   container_
       .empty()
-      .append("<div>")
+      .append(createTimer())
       .append(createAnswersTable(data));
 }
 
@@ -430,6 +430,23 @@ function createAnswersTable(data) {
   }
 
   return table;
+}
+
+function createTimer()
+{
+  var display = $('<div id=\'countdowntimer\'>'),
+      timer = new CountDownTimer(5);
+
+  timer.onTick(updateTimer).start();
+}
+
+function updateTimer(minutes, seconds) {
+  var display = document.querySelector('#countdowntimer');
+
+  minutes = minutes < 10? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  display.textContect = minutes + ':' + seconds;
 }
 
 /**
