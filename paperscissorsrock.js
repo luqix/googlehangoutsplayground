@@ -15,28 +15,31 @@
  */
 
 /**
- * @fileoverview Logic for the Yes/No/Maybe app.
+ * @fileoverview Logic for the Paper/Scissors/Rock/Random app.
  *
  * @author Tim Blasi (Google)
  */
 
 /** @enum {string} */
 var Answers = {
-  YES: 'y',
-  NO: 'n',
-  MAYBE: 'm'
+  PAPER: 'p',
+  SCISSORS: 's',
+  ROCK: 'r',
+  RANDOM: 'd'
 };
 var HOST = 'https://github.com/alexandergraves/googlehangoutsplayground/tree/master/static/paperscisorsrock';
 
 var DEFAULT_ICONS = {};
-DEFAULT_ICONS[Answers.YES] = HOST + '/yes.png';
-DEFAULT_ICONS[Answers.NO] = HOST + '/no.png';
-DEFAULT_ICONS[Answers.MAYBE] = HOST + '/maybe.png';
+DEFAULT_ICONS[Answers.PAPER] = HOST + '/paper.png';
+DEFAULT_ICONS[Answers.SCISSORS] = HOST + '/scissors.png';
+DEFAULT_ICONS[Answers.ROCK] = HOST + '/rock.png';
+DEFAULT_ICONS[Answers.RANDOM] = HOST + '/random.png';
 
 var DEFAULT_STATUS = {};
-DEFAULT_STATUS[Answers.YES] = 'Yes';
-DEFAULT_STATUS[Answers.NO] = 'No';
-DEFAULT_STATUS[Answers.MAYBE] = 'Maybe';
+DEFAULT_STATUS[Answers.PAPER] = 'Paper';
+DEFAULT_STATUS[Answers.SCISSORS] = 'Scissors';
+DEFAULT_STATUS[Answers.ROCK] = 'Rock';
+DEFAULT_STATUS[Answers.RANDOM] = 'Feeling Lucky';
 
 /**
  * Shared state of the app.
@@ -259,9 +262,10 @@ function render() {
     total: 0,
     responded: false
   };
-  data[Answers.YES] = [];
-  data[Answers.NO] = [];
-  data[Answers.MAYBE] = [];
+  data[Answers.PAPER] = [];
+  data[Answers.SCISSORS] = [];
+  data[Answers.ROCK] = [];
+  data[Answers.RANDOM] = [];
 
   var myId = getUserHangoutId();
   for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
@@ -394,6 +398,7 @@ function createAnswersTable(data) {
   if (!data.responded) {
     var instructImg = $('<img />')
         .attr({
+          // TODO: change this?
           'src': '//hangoutsapi.appspot.com/static/yesnomaybe/directions.png',
           'title': 'Make a selection'
         });
