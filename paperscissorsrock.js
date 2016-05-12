@@ -235,7 +235,7 @@ function onAnswer(newAnswer) {
 
 function isPlaying(participant)
 {
-  var isplayingKey = makeUserKey(p.id, 'ispalying');
+  var isplayingKey = makeUserKey(participant.id, 'ispalying');
   var isplaying = getState(isplayingKey);
   return isplaying !== false;
 }
@@ -262,6 +262,11 @@ function getWinningAnswer(hasPaper, hasScissors, hasRock)
   if (hasScissors && hasRock) return Answers.ROCK;
 
   return null;
+}
+
+function onNewRound()
+{
+  
 }
 
 function isRoundEnded()
@@ -560,6 +565,28 @@ function createAnswersTable(data, winner) {
         .addClass('footer')
         .append(footCell);
     
+    table.append(footRow);
+  }
+  else if (isRoundEnded()) {
+    var link =  $('<a />')
+          .attr('href', '#')
+          .text("New Round!")
+          .click(function() {
+            return false;
+          });
+    var btn = $('<div />')
+          .addClass('button')
+          .addClass('random')
+          .append(link)
+          .mouseup(onNewRound);
+    var footDiv = $('<div />').append(btn);
+    var footCell = $('<td colspan="3" />')
+        .append(footDiv);
+    var footRow = $('<tr />')
+        .attr('id', 'footer')
+        .addClass('footer')
+        .append(footCell);
+
     table.append(footRow);
   }
   else if (!data.responded && data.ispalying) {
