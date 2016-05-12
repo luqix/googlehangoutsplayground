@@ -453,11 +453,11 @@ function createTimer()
 {
   var display = $('<div id=\'countdowntimer\' />');
       
-  if(!timer) {
+  if(!timer_) {
     timer_ = new CountDownTimer(2*60);
   }
 
-  timer.onTick(updateTimer).start();
+  timer_.onTick(updateTimer).start();
 
   return display;
 }
