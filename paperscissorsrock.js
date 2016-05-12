@@ -293,6 +293,7 @@ function winningAnswerForThisRound()
 {
   if (!isRoundEnded()) return;
 
+  var data = {};
   data[Answers.PAPER] = [];
   data[Answers.SCISSORS] = [];
   data[Answers.ROCK] = [];
