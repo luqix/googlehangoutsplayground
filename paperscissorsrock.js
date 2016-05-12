@@ -438,6 +438,8 @@ function createTimer()
       timer = new CountDownTimer(5);
 
   timer.onTick(updateTimer).start();
+
+  return timer;
 }
 
 function updateTimer(minutes, seconds) {
