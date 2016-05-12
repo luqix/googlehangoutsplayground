@@ -434,12 +434,12 @@ function createAnswersTable(data) {
 
 function createTimer()
 {
-  var display = $('<div id=\'countdowntimer\'>'),
-      timer = new CountDownTimer(5);
+  var display = $('<div id=\'countdowntimer\' />'),
+      timer = new CountDownTimer(2*60);
 
   timer.onTick(updateTimer).start();
 
-  return timer;
+  return display;
 }
 
 function updateTimer(minutes, seconds) {
@@ -447,8 +447,9 @@ function updateTimer(minutes, seconds) {
 
   minutes = minutes < 10? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  /*display.textContect = minutes + ':' + seconds;*/
+  if(display != null) {
+    display.textContent = minutes + ':' + seconds;
+  }
 }
 
 /**
