@@ -443,11 +443,20 @@ function updateLocalParticipantsData(participants) {
   render();
 }
 
+/**
+ * Create required DOM elements and listeners.
+ */
+function prepareAppDOM() {
+  container_ = $('<div />');
+}
+
 (function() {
   if (gapi && gapi.hangout) {
 
     var initHangout = function(apiInitEvent) {
       if (apiInitEvent.isApiReady) {
+        prepareAppDOM();
+
         gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
           updateLocalDataState(stateChangeEvent.state,
                                stateChangeEvent.metadata);
