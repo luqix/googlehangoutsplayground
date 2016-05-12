@@ -457,7 +457,7 @@ function createTimer()
     timer_ = new CountDownTimer(2*60);
   }
 
-  timer_.onTick(updateTimer).start();
+  timer_.onTick(updateTimer).onTick(timerExpired).start();
 
   return display;
 }
@@ -470,6 +470,16 @@ function updateTimer(minutes, seconds) {
   if(display != null) {
     display.textContent = minutes + ':' + seconds;
   }
+}
+
+function timerExpired() {
+  if(this.expired()) {
+    endRound();
+  }
+}
+
+function endRound() {
+  
 }
 
 /**
