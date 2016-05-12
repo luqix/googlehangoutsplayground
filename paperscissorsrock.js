@@ -307,7 +307,7 @@ function render() {
 
   container_
       .empty()
-      .append(createTimer())
+      //.append(createTimer())
       .append(createAnswersTable(data));
 }
 
@@ -440,14 +440,14 @@ function createTimer()
   timer.onTick(updateTimer).start();
 }
 
-function updateTimer(minutes, seconds) {
+/*function updateTimer(minutes, seconds) {
   var display = document.querySelector('#countdowntimer');
 
   minutes = minutes < 10? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
   display.textContect = minutes + ':' + seconds;
-}
+}*/
 
 /**
  * Creates the DOM element that shows a single participant's answer.
