@@ -407,6 +407,10 @@ function render() {
       .empty()
       .append(createTimer())
       .append(createAnswersTable(data));
+
+  if(roundEnded_)  {
+    resetTimer();
+  }
 }
 
 /**
@@ -565,14 +569,20 @@ function updateTimer(minutes, seconds) {
 
 function timerExpired() {
   if(this.expired()) {
-    endRound();
+    resetTimer();
   }
 }
 
 function endRound() {
-  timer_ = null;
-
   roundEnded_ = true;
+}
+
+function resetTimer() {
+  if(timer_) {
+    timer_.duration = 0;
+  }
+  
+  timer_ = null;
 }
 
 function currentUserIsCurrentParticipant(participant) {
