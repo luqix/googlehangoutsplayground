@@ -321,6 +321,10 @@ function render() {
     }
   }
 
+  if(data.total == participants_.length) {
+    endRound();
+  }
+
   container_
       .empty()
       .append(createTimer())
@@ -405,7 +409,10 @@ function createAnswersTable(data) {
 
       var respondList = $('<ul />');
       for (var i = 0, iLen = data[ans].length; i < iLen; ++i) {
-        respondList.append(createParticipantElement(data[ans][i], ans));
+        var currentParticipant = data[ans][i];
+        if(roundEnded_ || currentUserIsCurrentParticipant(currentParticipant)) {
+          respondList.append(createParticipantElement(currentParticipant, ans));
+        }
       }
 
       var ansCell = $('<td />')
@@ -490,8 +497,8 @@ function endRound() {
   roundEnded_ = true;
 }
 
-function restartTimer() {
-  setTimeout(function() { timer.start(); }, 1000)
+function currentUserIsCurrentParticipant(participant) {
+  return participant.id == gapi.hangout.getParticipantId();
 }
 
 /**
