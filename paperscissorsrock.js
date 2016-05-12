@@ -67,6 +67,13 @@ var participants_ = null;
 var container_ = null;
 
 /**
+ * The countdown timer for the participants
+ * @type CountDownTimer
+ * @private
+ */
+var timer_ = null;
+
+/**
  * Executes the provided function after a minor delay.
  * @param {function()} func The function to execute.
  */
@@ -445,7 +452,10 @@ function createAnswersTable(data) {
 function createTimer()
 {
   var display = $('<div id=\'countdowntimer\' />'),
-      timer = new CountDownTimer(2*60);
+      
+  if(!timer) {
+    timer_ = new CountDownTimer(2*60);
+  }
 
   timer.onTick(updateTimer).start();
 
