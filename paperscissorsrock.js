@@ -257,6 +257,7 @@ function getUserHangoutId() {
 function render() {
   if (!state_ || !metadata_ || !participants_ || !container_) {
     return;
+  }
 
   var data = {
     total: 0,
@@ -412,7 +413,7 @@ function createParticipantElement(participant, response) {
   });
 
   var name = $('<h2 />').text(participant.person.displayName);
-  
+
   return $('<li />').append(avatar, name, statusAnchor);
 }
 
@@ -445,7 +446,7 @@ function updateLocalParticipantsData(participants) {
  */
 function prepareAppDOM() {
   container_ = $('<div />');
-}
+};
 
 (function() {
   if (gapi && gapi.hangout) {
