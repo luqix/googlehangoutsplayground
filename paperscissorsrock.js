@@ -345,7 +345,7 @@ function markWinningParticipants()
     var ans = getAnswer(p);
 
     if (isPlaying(p) && ans != winningAnswer)
-      saveValue(isplayingKey, false)
+      saveValue(isplayingKey, "")
   }
 }
 
