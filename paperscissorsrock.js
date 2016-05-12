@@ -310,17 +310,6 @@ function render() {
 }
 
 /**
- * Syncs local copy of the participants list with that on the server and renders
- *     the app to reflect the changes.
- * @param {!Array.<gapi.hangout.Participant>} participants The new list of
- *     participants.
- */
-function updateLocalParticipantsData(participants) {
-  participants_ = participants;
-  render();
-}
-
-/**
  * Creates the DOM element that shows the button for each response and displays
  * each participant under his answer.
  * @param {!Object.<!string, *>} data The information used to populate the
@@ -440,6 +429,17 @@ function createParticipantElement(participant, response) {
 function updateLocalDataState(state, metadata) {
   state_ = state;
   metadata_ = metadata;
+  render();
+}
+
+/**
+ * Syncs local copy of the participants list with that on the server and renders
+ *     the app to reflect the changes.
+ * @param {!Array.<gapi.hangout.Participant>} participants The new list of
+ *     participants.
+ */
+function updateLocalParticipantsData(participants) {
+  participants_ = participants;
   render();
 }
 
