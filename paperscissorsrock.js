@@ -451,7 +451,7 @@ function createAnswersTable(data) {
 
 function createTimer()
 {
-  var display = $('<div id=\'countdowntimer\' />'),
+  var display = $('<div id=\'countdowntimer\' />');
       
   if(!timer) {
     timer_ = new CountDownTimer(2*60);
