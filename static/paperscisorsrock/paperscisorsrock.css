@@ -250,3 +250,7 @@ table.columns td.maybe {
   font-size: 9pt;
   color: gray;
 }
+
+#countdowntimer {
+  text-align: center;
+}
