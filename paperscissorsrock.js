@@ -343,7 +343,7 @@ function prepareAppDOM() {
   var body = $('body');
   body.mousedown(function(e) {
     e.stopPropagation();
-  });
+  }).append(container_);
 };
 
 /**
