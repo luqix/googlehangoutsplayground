@@ -412,10 +412,7 @@ function createParticipantElement(participant, response) {
   });
 
   var name = $('<h2 />').text(participant.person.displayName);
-
-    statusAnchor.append(triggerLink);
-  }
-
+  
   return $('<li />').append(avatar, name, statusAnchor);
 }
 
