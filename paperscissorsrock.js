@@ -443,8 +443,6 @@ function createParticipantElement(participant, response) {
 
     var initHangout = function(apiInitEvent) {
       if (apiInitEvent.isApiReady) {
-        prepareAppDOM();
-
         gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
           updateLocalDataState(stateChangeEvent.state,
                                stateChangeEvent.metadata);
