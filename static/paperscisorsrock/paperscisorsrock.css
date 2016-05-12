@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 /**
- * Style information for Yes/No/Maybe gadget.
+ * Style information for Paper/Scissors/Rock gadget.
  *
  * Author: Tim Blasi (Google)
  */
@@ -67,7 +67,7 @@ td {
   vertical-align: top;
 }
 
-#YES {
+#PAPER {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
@@ -76,11 +76,11 @@ td {
   -webkit-border-bottom-left-radius: 6px;
 }
 
-#NO {
+#SCISSORS {
   background-color: #f4d9d9;
 }
 
-#MAYBE {
+#ROCK {
   background-color: #fff0d9;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -123,34 +123,35 @@ td {
 
 .button.random {
     width: 30%;
+    margin: auto;
 }
 
 .button:hover {
   border-color: #fcdd65;
 }
 
-#NO .button {
+#SCISSORS .button {
   border-color: #600;
 }
 
-#NO .button:hover {
+#SCISSORS .button:hover {
   border-color: #fcdd65;
 }
 
-#NO .button a {
+#SCISSORS .button a {
   border-color: #b55252;
   background-color: #c00;
 }
 
-#MAYBE .button {
+#ROCK .button {
   border-color: #7f6500;
 }
 
-#MAYBE .button:hover {
+#ROCK .button:hover {
   border-color: #fcdd65;
 }
 
-#MAYBE .button a {
+#ROCK .button a {
   border-color: #fcdd65;
   background-color: #fc0;
 }
@@ -191,7 +192,7 @@ p {
 .canvas {
 }
 
-table.columns td.yes {
+table.columns td.paper {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
@@ -204,7 +205,7 @@ table.columns td.no {
   background-color: #f4d9d9;
 }
 
-table.columns td.maybe {
+table.columns td.rock {
   background-color: #fff0d9;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;

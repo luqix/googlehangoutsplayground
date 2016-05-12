@@ -222,7 +222,7 @@ function onAnswer(newAnswer) {
 function onRandomAnswer()
 {
   var idx = Math.floor(Math.random() * (2-0+1) + 0);
-  onAnswer(Answers[keys(Answers)[idx]]);
+  onAnswer(Answers[Object.keys(Answers)[idx]]);
 }
 
 /**
