@@ -433,7 +433,7 @@ function render() {
 
   var winAndLose = winAndLoseParticipants();
   var winner = null;
-  if (winAndLose.winners.length === 1) {
+  if (winAndLose && winAndLose.winners && winAndLose.winners.length === 1) {
     winner = winAndLose.winners[0];
   }
 
