@@ -438,20 +438,22 @@ function render() {
     winner = winAndLose.winners[0];
   }
 
-  markWinningParticipants();
+  if (!winner) {
+    markWinningParticipants();
 
-  if(data.total == participants_.length) {
-    endRound();
+    if(data.total == participants_.length) {
+      endRound();
+    }
+
+    if(roundEnded_)  {
+      resetTimer();
+    }
   }
 
   container_
       .empty()
       .append(createTimer())
       .append(createAnswersTable(data, winner));
-
-  if(roundEnded_)  {
-    resetTimer();
-  }
 }
 
 /**
