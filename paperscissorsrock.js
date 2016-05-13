@@ -269,7 +269,7 @@ function onNewRound()
   for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
     var p = participants_[i];
     if (isPlaying(p)) {
-      var answerKey = makeUserKey(myId, 'answer');
+      var answerKey = makeUserKey(p.id, 'answer');
       removeValue(answerKey);
     }
   }
