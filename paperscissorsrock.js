@@ -235,7 +235,7 @@ function onAnswer(newAnswer) {
 
 function isPlaying(participant)
 {
-  var isplayingKey = makeUserKey(participant.id, 'ispalying');
+  var isplayingKey = makeUserKey(participant.id, 'isplaying');
   var isplaying = getState(isplayingKey);
   return isplaying !== false;
 }
@@ -340,7 +340,7 @@ function markWinningParticipants()
 
   for (var i = 0, iLen = participants_.length; i < iLen; ++i) {
     var p = participants_[i];
-    var isplayingKey = makeUserKey(p.id, 'ispalying');
+    var isplayingKey = makeUserKey(p.id, 'isplaying');
 
     var ans = getAnswer(p);
 
@@ -598,7 +598,7 @@ function createAnswersTable(data, winner) {
 
     table.append(footRow);
   }
-  else if (!data.responded && data.ispalying) {
+  else if (!data.responded && data.isplaying) {
     var instructImg = $('<img />')
         .attr({
           'src': '//hangoutsapi.appspot.com/static/yesnomaybe/directions.png',
